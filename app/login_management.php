@@ -1,23 +1,22 @@
 <?php
 
 	// Define $username and $password
-	$username=$_POST['username'];
-	$password=$_POST['password'];
+	$username = null;
+	$password = null;
 
-	if ($username == "admin") {
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		if (!empty($_POST['username']) && !empty($_POST['password'])) {
+			$username = $_POST['username'];
+			$password = $_POST['password'];
 
-		session_start();
-		$_SESSION['logged-user'] = 'adminmrg';
-
-	}
-	else{
-		session_start();
-		#print_r($_SESSION);
-		if ($_SESSION['logged-user'] == 'adminmrg') {
-			#header("Location: admin.php");
-		}
-		else{
-			header("Location: login.php");
+			if($username == 'frans' && $password == 'lbg2017') {
+				session_start();
+				$_SESSION['authenticated'] = 'true';
+				header('Location: admin.php');
+			}
+			else {
+				header('Location: login.php');
+			}
 		}
 	}
 ?>
