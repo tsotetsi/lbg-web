@@ -70,7 +70,7 @@
 
 			$conn = pg_pconnect($db->connString());
 
-			try {
+			try{
 
 				$flats['floor_one'] = pg_fetch_all(pg_query($conn, "SELECT flat_number FROM flats WHERE flat_number LIKE '1%' EXCEPT (SELECT flat_number FROM approvals) ORDER BY flat_number ASC"));
 				$flats['floor_two'] = pg_fetch_all(pg_query($conn, "SELECT flat_number FROM flats WHERE flat_number LIKE '2%' EXCEPT (SELECT flat_number FROM approvals) ORDER BY flat_number ASC"));
@@ -83,6 +83,27 @@
 				echo "Error fetching flats.";
 			}
 			return $flats;
+		}
+
+		public function getRoomStats()
+		{
+			$stats = array();
+			$db = new DB();
+			$pdo = $db->connect();
+			$conn = pg_connect($db->connString());
+
+			try{
+				$stats['TID'] = pg_fetch_all(pg_query($conn, "SELECT COUNT(*) FROM flats WHERE flat_type LIKE 'TID'"));
+				$stats['DID'] = pg_fetch_all(pg_query($conn, "SELECT COUNT(*) FROM flats WHERE flat_type LIKE 'DID'"));
+				$stats['TIT'] = pg_fetch_all(pg_query($conn, "SELECT COUNT(*) FROM flats WHERE flat_type LIKE 'TIT'"));
+				$stats['VIV'] = pg_fetch_all(pg_query($conn, "SELECT COUNT(*) FROM flats WHERE flat_type LIKE 'VIV'"));
+				$stats['BCA'] = pg_fetch_all(pg_query($conn, "SELECT COUNT(*) FROM flats WHERE flat_type LIKE 'BCA'"));
+				$stats['BCB'] = pg_fetch_all(pg_query($conn, "SELECT COUNT(*) FROM flats WHERE flat_type LIKE 'BCB'"));								
+
+			}catch (Exception $ex) {
+				echo "Error fetching stats.";
+			}
+			return $stats;
 		}
 
 		/**	

@@ -16,7 +16,6 @@
       <p>Please wait for reply before making another application</p>
     </div>
   </div>
-
 	<ul class="pager">
     	<li><a href="./">Exit</a></li>
   	</ul>

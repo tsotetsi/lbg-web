@@ -9,6 +9,9 @@
     <p class="text-info">Room Allocation</p> 
   </div>
   <div class="row">
+  	<hr>
+  </div>
+  <div class="row">
     <div class="col-sm-4">
       <h3 class="text-center">Rule 1</h3>
       <p>Familiarize yourself with the online room/flat allocation process available on Vula.</p>

@@ -8,6 +8,9 @@
     	<li><a href="./">Back</a></li>
   	</ul>
   <div class="row">
+  	<hr>
+  </div>
+  <div class="row">
     <div class="col-sm-4">
       <h3 class="text-center">Floor 1</h3>
       <div class="row">
