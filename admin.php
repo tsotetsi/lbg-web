@@ -1,15 +1,5 @@
 <?php
 	include_once 'app/login_management.php';
-?>
-
-<?php
-
-	if ($_SESSION['logged-user'] == "adminmrg") {
-		echo "logged in";
-	}
-?>
-
-<?php
 	include_once './data/view/templates/head.html';
 ?>
 
@@ -22,11 +12,11 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="#">Liesbeeck Gardens</a>
+	      <a class="navbar-brand" href="/">Liesbeeck Gardens</a>
 	    </div>
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#">Home - Admin</a></li>
+	        <li><a href="./admin.php">Home</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	        <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -46,7 +36,7 @@
 	    <div class="col-sm-1">
 	    </div>
 	    <div class="col-sm-10">
-	      <p class="bg-primary"> >>Applications.</p>
+	      <p class="bg-primary">Applications.</p>
 			  <div class="table-responsive">          
 			  <table class="table">
 			    <thead>
