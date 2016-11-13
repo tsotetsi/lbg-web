@@ -10,55 +10,66 @@
 	$applications_table = "applications";
 	$approval_table = "approvals";
 	$decline_table = "declines";
+	$blocked_table = "blocked";
 
 	$pdo = new PDO("pgsql:host=localhost;port=5432;dbname=lbgsample;user=webdev;password=webdev");
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
+	/*
+	* Flats table.
+	*/
 	try {
-
 			$query = "CREATE TABLE IF NOT EXISTS $flats_table(
-						flat_number CHAR(4) PRIMARY KEY,
-						flat_type CHAR(3) NOT NULL
-					);";
+								flat_number CHAR(4) PRIMARY KEY,
+								flat_type CHAR(3) NOT NULL
+								);";
 			$stmt  = $pdo->prepare($query);
 			$stmt->execute();
 
 			$query = "CREATE TABLE IF NOT EXISTS $applications_table(
-						id SERIAL PRIMARY KEY,
-						flat_number CHAR(4) NOT NULL,
-						student_number VARCHAR(32),
-						name VARCHAR(64) NOT NULL,
-						surname VARCHAR(64) NOT NULL,
-						mobile_number VARCHAR(32) NOT NULL,
-						gender CHAR(6) NOT NULL,
-						date_of_application TIMESTAMP NOT NULL
-					);";
+								id SERIAL PRIMARY KEY,
+								flat_number CHAR(4) NOT NULL,
+								student_number VARCHAR(32),
+								name VARCHAR(64) NOT NULL,
+								surname VARCHAR(64) NOT NULL,
+								mobile_number VARCHAR(32) NOT NULL,
+								gender CHAR(6) NOT NULL,
+								date_of_application TIMESTAMP NOT NULL
+								);";
 			$stmt  = $pdo->prepare($query);
 			$stmt->execute();
 
 			$query = "CREATE TABLE IF NOT EXISTS $approval_table(
-						id SERIAL PRIMARY KEY,
-						student_number VARCHAR(32),
-						name VARCHAR(64) NOT NULL,
-						surname VARCHAR(64) NOT NULL,
-						mobile_number VARCHAR(32) NOT NULL,
-						flat_number CHAR(4) NOT NULL,
-						gender CHAR(6) NOT NULL,
-						approval_date TIMESTAMP NOT NULL
-					);";
+								id SERIAL PRIMARY KEY,
+								student_number VARCHAR(32),
+								name VARCHAR(64) NOT NULL,
+								surname VARCHAR(64) NOT NULL,
+								mobile_number VARCHAR(32) NOT NULL,
+								flat_number CHAR(4) NOT NULL,
+								gender CHAR(6) NOT NULL,
+								approval_date TIMESTAMP NOT NULL
+								);";
 			$stmt = $pdo->prepare($query);
 			$stmt->execute();
 
 			$query = "CREATE TABLE IF NOT EXISTS $decline_table(
+								id SERIAL PRIMARY KEY,
+								student_number VARCHAR(32),
+								name VARCHAR(64) NOT NULL,
+								surname VARCHAR(64) NOT NULL,
+								mobile_number VARCHAR(32) NOT NULL,
+								flat_number CHAR(4) NOT NULL,
+								gender CHAR(6) NOT NULL,
+								decline_date TIMESTAMP NOT NULL
+								);";
+			$stmt = $pdo->prepare($query);
+			$stmt->execute();
+
+			$query = "CREATE TABLE IF NOT EXISTS $blocked_table(
 						id SERIAL PRIMARY KEY,
 						student_number VARCHAR(32),
-						name VARCHAR(64) NOT NULL,
-						surname VARCHAR(64) NOT NULL,
-						mobile_number VARCHAR(32) NOT NULL,
-						flat_number CHAR(4) NOT NULL,
-						gender CHAR(6) NOT NULL,
-						decline_date TIMESTAMP NOT NULL
+						blocked_date TIMESTAMP NOT NULL
 					);";
 			$stmt = $pdo->prepare($query);
 			$stmt->execute();
@@ -512,6 +523,4 @@
 		echo "Error inserting values";
 		echo $ex->getMessage();
 	}
-
-
 ?>
