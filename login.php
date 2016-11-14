@@ -29,14 +29,13 @@
 		    </div>
 		  </div>
 		</nav>
-
 		<div class="container">
 		  <div class="row">
 		    <div class="col-sm-4">
 
 		    </div>
 		    <div class="col-lg-4">
-				<form class="form-horizontal" method="post" action="admin.php">
+				<form class="form-horizontal" method="POST" action="./admin.php">
 				<fieldset>
 
 				<!-- Form Name -->

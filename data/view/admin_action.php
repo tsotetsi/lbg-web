@@ -1,5 +1,6 @@
 <?php
-	include_once 'data/controller/controller.php';
+	include_once './data/controller/controller.php';
+	include_once './data/controller/auth.php';
 
 	$action = $_GET['action'];
 	$id = $_GET['id'];

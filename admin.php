@@ -1,6 +1,7 @@
 <?php
 	include_once 'app/login_management.php';
 	include_once './data/view/templates/head.html';
+	include_once './data/controller/auth.php';
 ?>
 
 <body>
@@ -61,7 +62,6 @@
 			    </tbody>
 			  </table>
 			  </div>
-    
 	    </div>
 	    <div class="col-sm-1">
 	    </div>

@@ -1,5 +1,7 @@
 <?php
-	include_once 'data/controller/controller.php';
+	include_once './data/controller/controller.php';
+	include_once './data/controller/auth.php';
+
 	
 	$controller = new Controller();
 	$blocked = $controller->gedAllBlocked();

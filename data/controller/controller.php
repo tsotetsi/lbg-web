@@ -193,7 +193,7 @@
 			$conn = pg_pconnect($db->connString());
 
 			try {
-				$flat = substr($flat_number, 0, 3);
+				//$flat = substr($flat_number, 0, 3);
 				$query = "SELECT * FROM applications ORDER BY flat_number, date_of_application";
 				$applications['applications'] = pg_fetch_all(pg_query($conn, $query));
 
