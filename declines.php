@@ -27,7 +27,7 @@
 		    </div>
 		    <div class="collapse navbar-collapse" id="myNavbar">
 		      <ul class="nav navbar-nav">
-		        <li class="active"><a href="#">Home - Admin</a></li>
+		        <li><a href="admin.php">Home</a></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="./logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -61,16 +61,13 @@
 				    </thead>
 				    <tbody>
 				      <tr>
-
-	     			<?php
-		      			include_once 'data/view/admin_declines.php';
-		      		?>
-
+		     			<?php
+			      			include_once 'data/view/admin_declines.php';
+			      		?>
 				      </tr>
 				    </tbody>
 				  </table>
 				  </div>
-	    
 		    </div>
 		    <div class="col-sm-2">
 		    </div>
