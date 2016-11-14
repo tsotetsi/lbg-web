@@ -2,15 +2,8 @@
 	include_once 'app/login_management.php';
 ?>
 
-<?php
-
-	if ($_SESSION['logged-user'] == "adminmrg") {
-		echo "logged in";
-	}
-?>
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<title>LBG Room Allocation</title>
 	 	<meta charset="utf-8">
@@ -28,7 +21,7 @@
 		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>                        
+		        <span class="icon-bar"></span>
 		      </button>
 		      <a class="navbar-brand" href="#">Liesbeeck Gardens</a>
 		    </div>
@@ -42,18 +35,15 @@
 		    </div>
 		  </div>
 		</nav>
-
 		<div class="container">
 		  <div class="row text-center">
 		    <div class="col-sm-12">
 		      <h3 class="text-center"></h3>
-
 		      <?php
 		      	include_once 'data/view/admin_action.php';
 		      ?>
 		    </div>
 		  </div>
-
 			<ul class="pager">
 		    	<li><a href="/admin.php">Return to Admin Page</a></li>
 		  	</ul>

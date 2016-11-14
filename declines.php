@@ -2,13 +2,6 @@
 	include_once 'app/login_management.php';
 ?>
 
-<?php
-
-	if ($_SESSION['logged-user'] == "adminmrg") {
-		echo "logged in";
-	}
-?>
-
 <!DOCTYPE html>
 <html>
 	<head>

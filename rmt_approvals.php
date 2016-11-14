@@ -53,16 +53,13 @@
 				    </thead>
 				    <tbody>
 				      <tr>
-
 	     			<?php
 		      			include_once 'data/view/admin_approvals_rmt.php';
 		      		?>
-
 				      </tr>
 				    </tbody>
 				  </table>
 				  </div>
-	    
 		    </div>
 		    <div class="col-sm-1">
 		    </div>

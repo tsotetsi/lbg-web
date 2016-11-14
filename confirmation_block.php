@@ -2,17 +2,8 @@
 	include_once 'app/login_management.php';
 ?>
 
-
-<?php
-
-	if ($_SESSION['logged-user'] == "adminmrg") {
-		echo "logged in";
-	}
-?>
-
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<title>LBG Room Allocation</title>
 	 	<meta charset="utf-8">
@@ -22,7 +13,6 @@
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	  	<script src="/js/bootstrap.min.js"></script>
 	</head>
-
 	<body>
 		<nav class="navbar navbar-inverse navbar-static-top">
 		  <div class="container-fluid">
@@ -44,20 +34,16 @@
 		    </div>
 		  </div>
 		</nav>
-
 		<div class="container">
 		  <div class="row text-center">
 		    <div class="col-sm-12">
 		      <h3 class="text-center"></h3>
-
 		      <?php
 		      		include_once 'app/process_block.php';
 		      ?>
-
 		      <p>The student number specified was blocked.</p>
 		    </div>
 		  </div>
-
 			<ul class="pager">
 		    	<li><a href="./admin.php">Go Back to Admin Page</a></li>
 		  	</ul>

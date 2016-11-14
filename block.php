@@ -2,16 +2,8 @@
 	include_once 'app/login_management.php';
 ?>
 
-<?php
-
-	if ($_SESSION['logged-user'] == "adminmrg") {
-		echo "logged in";
-	}
-?>
-
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<title>LBG Room Allocation</title>
 	 	<meta charset="utf-8">
@@ -21,7 +13,6 @@
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	  	<script src="/js/bootstrap.min.js"></script>
 	</head>
-
 	<body>
 		<nav class="navbar navbar-inverse navbar-static-top">
 		  <div class="container-fluid">
@@ -65,21 +56,17 @@
 				    </thead>
 				    <tbody>
 				      <tr>
-
-	     			<?php
-		      			include_once 'data/view/admin_block.php';
-		      		?>
-
+		     			<?php
+			      			include_once 'data/view/admin_block.php';
+			      		?>
 				      </tr>
 				    </tbody>
 				  </table>
 				  </div>
-	    
 		    </div>
 		    <div class="col-sm-4">
 		    </div>
 		  </div>
-
 		  <div class="row">
 		    <div class="col-sm-4"></div>		  	
 		  	<div class="col-sm-4">
