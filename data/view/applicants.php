@@ -1,6 +1,6 @@
 <?php
 	include_once 'data/controller/controller.php';
-	include_once './data/controller/auth.php';
+	#include_once './data/controller/auth.php';
 
 	$controller = new Controller();
 	$applicant = $controller->getApplications(strip_tags(trim($_GET['id'])));
