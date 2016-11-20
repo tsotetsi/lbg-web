@@ -106,6 +106,18 @@
 			return $stats;
 		}
 
+
+		/**
+		*	Get SMS Credits
+		*/
+		public function getSmsCredits()
+		{
+			$curl = curl_init();
+			curl_setopt($curl, CURLOPT_URL, 'http://bulksms.2way.co.za/eapi/user/get_credits/1/1.1?username=thapelotsotetsi&password=thapelo407');
+			$result['credits'] = curl_exec($curl);
+			return $result;
+		}
+
 		/**	
 		*	Make room application.
 		*/
