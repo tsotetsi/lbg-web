@@ -4,7 +4,9 @@
 
 	$controller = new Controller();
 	$applications = $controller->gedAllApplications();
-	echo $controller->getSmsCredits(). 'SMS Credits Remaining.';
+	echo "<p style='font-weight:bold;'>SMS Credits: ";
+	echo $controller->getSmsCredits();
+	echo "</p>";
 
 	foreach ($applications['applications'] as $key => $value) {
 		$gender = "";
