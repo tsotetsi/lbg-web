@@ -65,7 +65,8 @@
 					  <label class="col-md-4 control-label" for="mobile_number">Mobile#</label>  
 					  <div class="col-md-4">
 					  <input id="mobile_number" name="mobile_number" placeholder="+27831234567" class="form-control input-md" required="" type="text">
-					  <span class="help-block">e.g +27831234567</span>  
+					  <span class="help-block">e.g +27831234567</span> 
+                      <span style="color: red">Please use mobile number format as above. i.e +27 and your mobile number without the leading zero to receive sms notifications.</span>
 					  </div>
 					</div>
 					</fieldset>
