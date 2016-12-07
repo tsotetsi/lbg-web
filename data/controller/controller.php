@@ -147,6 +147,7 @@
 		public function getApplications($flat_number)
 		{
 			$applicants = array();
+			$approvals = array();
 
 			$db = new DB();
 			$pdo = $db->connect();
@@ -161,7 +162,35 @@
 			} catch (Exception $ex) {
 				echo "Error getting room applications";
 			}
+			try{
+				$flat = substr($flat_number, 0, 3);
+				$query = "SELECT * FROM approvals WHERE flat_number LIKE '$flat%'";
+				$applicants['approvals'] = pg_fetch_all(pg_query($conn, $query));			
+
+			}catch(Exception $ex){
+				echo "Error getting approvals";
+			}			
 			return $applicants;
+		}
+
+
+		public function getAllApprovals($flat_number)
+		{
+			$approvals = array();
+
+			$db = new DB();
+			$pdo = $db->connect();
+			$conn = pg_connect($db->connString());
+
+			try{
+				$flat = substr($flat_number, 0, 3);
+				$query = "SELECT * FROM approvals WHERE flat_number LIKE '$flat%'";
+				$approvals['approvals'] = pg_fetch_all(pg_query($conn, $query));			
+
+			}catch(Exception $ex){
+				echo "Error getting approvals";
+			}
+			return $approvals;
 		}
 
 		/**	

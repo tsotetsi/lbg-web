@@ -6,6 +6,7 @@
 
 	if ($applicant['applicants'] == false) {
 		echo "No one has applied to stay in this room/flat.";
+		echo "<hr>";
 	}
 	else{
 		echo "<p>The following students have applied to stay in this room/flat:";
@@ -14,6 +15,18 @@
 			if ($value['gender'] == 1) {$gender = "Male";}else{$gender = "Female";}
 
 			echo "<p>".$value['name']." ". $value['flat_number']. " ". $gender. " ". $value['date_of_application']."</p>";
+		}
+		echo "<hr>";
+	}
+	if($applicant['approvals'] == false){
+		echo "<p>No student has been approved to stay in this flat/room.";
+	}else{
+		echo "<p>The following student(s) have been approved to stay in this flat:";
+		foreach ($applicant['approvals'] as $key => $value) {
+			$gender = "";
+			if ($value['gender'] == 1) {$gender = "Male";}else{$gender = "Female";}
+
+			echo "<p>".$value['name']." ". $value['flat_number']. " ". $gender. " ". $value['date_of_approval']."</p>";
 		}
 	}
 ?>
