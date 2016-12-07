@@ -24,7 +24,7 @@
 		    </div>
 		    <div class="collapse navbar-collapse" id="myNavbar">
 		      <ul class="nav navbar-nav">
-		        <li class="active"><a href="#">Home - RMT</a></li>
+		        <li class="active"><a href="#">Home</a></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="login.php"><span class="glyphicon glyphicon-log-out"></span> Login</a></li>
@@ -38,15 +38,13 @@
 		    <div class="col-sm-1">
 		    </div>
 		    <div class="col-sm-10">
-		      <p class="bg-primary"> >> Approvals.</p>
+		      <p class="bg-primary">Approvals.</p>
 				  <div class="table-responsive">          
 				  <table class="table">
 				    <thead>
 				      <tr>
 				        <th>Room#</th>
-				        <th>Student#</th>
 				        <th>Surname & Name</th>
-				        <th>Mobile#</th>
 				        <th>Gender</th>
 				        <th>Date </th>
 				      </tr>
