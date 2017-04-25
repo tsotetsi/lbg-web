@@ -11,10 +11,9 @@
 	else{
 		echo "<p>The following students have applied to stay in this room/flat:";
 		foreach ($applicant['applicants'] as $key => $value) {
-			$gender = "";
-			if ($value['gender'] == 1) {$gender = "Male";}else{$gender = "Female";}
-
-			echo "<p>".$value['name']." ". $value['flat_number']. " ". $gender. " ". $value['date_of_application']."</p>";
+			$gender = "Male";
+			if($value['gender'] == 2){$gender = "Female";}
+			echo "<p>".$value['name']." ". $value['flat_number']. " ".$gender. " ". $value['date_of_application']."</p>";
 		}
 		echo "<hr>";
 	}
@@ -23,10 +22,7 @@
 	}else{
 		echo "<p>The following student(s) have been approved to stay in this flat:";
 		foreach ($applicant['approvals'] as $key => $value) {
-			$gender = "";
-			if ($value['gender'] == 1) {$gender = "Male";}else{$gender = "Female";}
-
-			echo "<p>".$value['name']." ". $value['flat_number']. " ". $gender. " ". $value['date_of_approval']."</p>";
+			echo "<p>".$value['name']." ". $value['flat_number']. " ". $value['gender']. " ". $value['date_of_approval']."</p>";
 		}
 	}
 ?>
