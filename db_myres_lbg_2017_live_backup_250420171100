@@ -1,0 +1,1311 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.6
+-- Dumped by pg_dump version 9.5.6
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'SQL_ASCII';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: applications; Type: TABLE; Schema: public; Owner: myres
+--
+
+CREATE TABLE applications (
+    id integer NOT NULL,
+    flat_number character(4) NOT NULL,
+    student_number character varying(32),
+    name character varying(64) NOT NULL,
+    surname character varying(64) NOT NULL,
+    mobile_number character varying(32) NOT NULL,
+    gender character(6) NOT NULL,
+    date_of_application timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE applications OWNER TO myres;
+
+--
+-- Name: applications_id_seq; Type: SEQUENCE; Schema: public; Owner: myres
+--
+
+CREATE SEQUENCE applications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE applications_id_seq OWNER TO myres;
+
+--
+-- Name: applications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: myres
+--
+
+ALTER SEQUENCE applications_id_seq OWNED BY applications.id;
+
+
+--
+-- Name: approvals; Type: TABLE; Schema: public; Owner: myres
+--
+
+CREATE TABLE approvals (
+    id integer NOT NULL,
+    student_number character varying(32),
+    name character varying(64) NOT NULL,
+    surname character varying(64) NOT NULL,
+    mobile_number character varying(32) NOT NULL,
+    flat_number character(4) NOT NULL,
+    gender character(6) NOT NULL,
+    approval_date timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE approvals OWNER TO myres;
+
+--
+-- Name: approvals_id_seq; Type: SEQUENCE; Schema: public; Owner: myres
+--
+
+CREATE SEQUENCE approvals_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE approvals_id_seq OWNER TO myres;
+
+--
+-- Name: approvals_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: myres
+--
+
+ALTER SEQUENCE approvals_id_seq OWNED BY approvals.id;
+
+
+--
+-- Name: blocked; Type: TABLE; Schema: public; Owner: myres
+--
+
+CREATE TABLE blocked (
+    id integer NOT NULL,
+    student_number character varying(32),
+    blocked_date timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE blocked OWNER TO myres;
+
+--
+-- Name: blocked_id_seq; Type: SEQUENCE; Schema: public; Owner: myres
+--
+
+CREATE SEQUENCE blocked_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE blocked_id_seq OWNER TO myres;
+
+--
+-- Name: blocked_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: myres
+--
+
+ALTER SEQUENCE blocked_id_seq OWNED BY blocked.id;
+
+
+--
+-- Name: declines; Type: TABLE; Schema: public; Owner: myres
+--
+
+CREATE TABLE declines (
+    id integer NOT NULL,
+    student_number character varying(32),
+    name character varying(64) NOT NULL,
+    surname character varying(64) NOT NULL,
+    mobile_number character varying(32) NOT NULL,
+    flat_number character(4) NOT NULL,
+    gender character(6) NOT NULL,
+    decline_date timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE declines OWNER TO myres;
+
+--
+-- Name: declines_id_seq; Type: SEQUENCE; Schema: public; Owner: myres
+--
+
+CREATE SEQUENCE declines_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE declines_id_seq OWNER TO myres;
+
+--
+-- Name: declines_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: myres
+--
+
+ALTER SEQUENCE declines_id_seq OWNED BY declines.id;
+
+
+--
+-- Name: flats; Type: TABLE; Schema: public; Owner: myres
+--
+
+CREATE TABLE flats (
+    flat_number character(4) NOT NULL,
+    flat_type character(3) NOT NULL
+);
+
+
+ALTER TABLE flats OWNER TO myres;
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: myres
+--
+
+ALTER TABLE ONLY applications ALTER COLUMN id SET DEFAULT nextval('applications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: myres
+--
+
+ALTER TABLE ONLY approvals ALTER COLUMN id SET DEFAULT nextval('approvals_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: myres
+--
+
+ALTER TABLE ONLY blocked ALTER COLUMN id SET DEFAULT nextval('blocked_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: myres
+--
+
+ALTER TABLE ONLY declines ALTER COLUMN id SET DEFAULT nextval('declines_id_seq'::regclass);
+
+
+--
+-- Data for Name: applications; Type: TABLE DATA; Schema: public; Owner: myres
+--
+
+COPY applications (id, flat_number, student_number, name, surname, mobile_number, gender, date_of_application) FROM stdin;
+667	517C	mtmdiv001	Divhani	Matumba	+27820506449	1     	2017-03-09 05:01:00
+670	    					      	2017-03-10 09:17:00
+668	418C	sngles001	Leshan	Singh	+27711073575	2     	2017-03-09 08:07:00
+666	418C	mndleb001	Lebogang	Mandla	+27640806331	2     	2017-03-09 04:29:00
+669	418C	ngmapi001	Apiwe	Ngambu	+2797067824	1     	2017-03-09 08:26:00
+\.
+
+
+--
+-- Name: applications_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myres
+--
+
+SELECT pg_catalog.setval('applications_id_seq', 670, true);
+
+
+--
+-- Data for Name: approvals; Type: TABLE DATA; Schema: public; Owner: myres
+--
+
+COPY approvals (id, student_number, name, surname, mobile_number, flat_number, gender, approval_date) FROM stdin;
+4	mpttso002	Tsotelo	Mapetla	 27735380304	122 	Male  	2016-11-17 09:23:00
+5	mgnchu001	Chuma	Mgini	0727154382	220 	Female	2016-11-17 09:24:00
+6	lmktla001	Tlaleng	Lemeke	 26668239048	222 	Female	2016-11-17 09:24:00
+7	rmnmma003	Mmapule	Ramonyai	 27728597397	235 	Female	2016-11-17 09:24:00
+8	mpyles001	Lesego	Moepye	0792394674	239 	Female	2016-11-17 09:24:00
+9	ptxtsh001	Tshego	Putu	0722179404	320 	Female	2016-11-17 09:24:00
+10	mchnap001	Napo	Mochekoane	 27734067526	321 	Male  	2016-11-17 09:24:00
+11	hbrhub001	Hubert	ivy	 27719704001	322 	Male  	2016-11-17 09:24:00
+12	gwrjer001	Jerry	Gwarada	0824370158	332 	Male  	2016-11-17 09:24:00
+13	mngtsh024	Tshediso	Mangope	 27 63 271 3316	333 	Male  	2016-11-17 09:24:00
+14	mgtnto001	ntokozo	mgiti	 27604468487	334 	Male  	2016-11-17 09:24:00
+15	ndmrew001	Reward	Ndimande	0782848750	335 	Male  	2016-11-17 09:24:00
+16	vvnste003	Stefan	van Veenendaal	 27727215214	420A	Male  	2016-11-17 09:24:00
+64	qhbtha001	Thabo	Qhobosheane	 27781474357	302A	Male  	2016-11-24 10:14:00
+65	mdnchr003	christopher	mudongo	 27784973873	636A	Male  	2016-11-24 10:15:00
+66	nzmsip003	Siphesihle	Nzimande	 27787318407	636B	Male  	2016-11-24 10:16:00
+67	nkxleb001	Lebohang	Nku	 27788140306	132 	Male  	2016-11-24 10:24:00
+68	bthbon007	Bongivangeli	Buthelezi	 27760356244	135 	Male  	2016-11-24 10:38:00
+69	ngklee001	Lee	Ngakaagae	 27813733308	240 	Male  	2016-11-24 10:38:00
+70	mdztak011	Takudzwanashe	Mudzuri	 27781314391	415B	Male  	2016-11-24 10:45:00
+71	smktha004	Thato	Semoko	 27632433855	323 	Male  	2016-11-24 10:53:00
+72	hlpand001	Andrew	Hlupo	 27780706720	423 	Male  	2016-11-24 12:14:00
+73	sjdani001	Anita	Sijadu	 27633662024	425 	Female	2016-11-24 12:28:00
+74	tshzin010	Zintle	Tshaka	 27732184634	134 	Female	2016-11-24 12:39:00
+75	slnnic005	Nicholson	Salani	 26771602545	121 	Male  	2016-11-24 12:57:00
+76	mngzen001	Zenaidah	Mangena	 27747707673	223 	Female	2016-11-24 13:28:00
+78	rmkvhu001	Vhutshilo	Ramakgolo	 27828164745	238 	Male  	2016-11-24 13:41:00
+79	lpttse001	Tsepiso	Lepota	 27797113420	133 	Female	2016-11-24 14:43:00
+80	smlkat002	Katja	Samouilhan	 27743083887	328A	Female	2016-11-24 14:44:00
+81	bkhzwe001	Zwelihle	Bukhwele	 27620822485	123 	Male  	2016-11-24 14:46:00
+83	nymgam001	gamuchirai	nyamupinga	0607980346	231 	Female	2016-11-24 15:05:00
+84	gczalu001	Alungile	Gcaza	 27798512326	241 	Male  	2016-11-24 15:08:00
+85	mkttok001	Tokelo	Makatsa	0840832452	226 	Male  	2016-11-24 15:20:00
+86	mlnvim001	Vimbai	Malandu	 263779600782	232 	Female	2016-11-24 15:35:00
+87	mslmdu002	Mduduzi	Masilela	 27715549620	233 	Male  	2016-11-24 15:37:00
+88	mlnnal002	Naledi	Malinga	 7737358706	227 	Female	2016-11-25 02:33:00
+90	nxzmkh001	Mkhuseli	Nxozana	 27740184838	229 	Male  	2016-11-25 02:33:00
+91	grgteb001	Teboho	George	 27826830583	431 	Female	2016-11-25 02:33:00
+92	chktaf004	Tafadzwa	Chakanyuka	 263 772306440	619A	Male  	2016-11-25 02:34:00
+93	adxara001	Mansa	Aidoo	 27783469592	619B	Female	2016-11-25 02:34:00
+94	mllneo005	Neo	Maliela	 27711478782	634 	Male  	2016-11-25 02:34:00
+95	shnlin008	Lindokuhle	Shongwe	 27825067554	310A	Male  	2016-11-25 04:36:00
+96	mzskud001	Kudakwashe	Mazise	 263775966647	230 	Male  	2016-11-25 04:36:00
+98	dzmvim001	Vimbainashe	Dzimbanhete	 27711717116	424 	Female	2016-11-25 05:13:00
+99	mkkbas002	MACKK BASEGO	MAKOKO	 27836923260	203A	Male  	2016-11-25 05:13:00
+101	mthnom065	Nomfundo	Mthembu	 27719642874	529B	Female	2016-11-25 05:13:00
+103	vlknom005	Nomfundo	Vilakazi	 27712774990	428 	Female	2016-11-25 05:33:00
+104	mtbtii001	Tiiso	Motabola	 2774 7814361	430 	Female	2016-11-25 05:33:00
+105	jckdum001	Dumisani	Jack	 277807060908	635A	Male  	2016-11-25 07:44:00
+106	mbhaph001	aphiwe	Mabhija	 27630373280	426 	Male  	2016-11-25 07:44:00
+108	nblkel001	Keletso	Nobela	0738301129	407A	Female	2016-11-25 09:08:00
+109	krvnda001	Ndangariro	Kurivara	 263772941481	427 	Male  	2016-11-25 09:08:00
+111	mmtgla001	Gladness Tatenda	Mamutse	 263772136745	432 	Female	2016-11-25 09:08:00
+112	skdgor001	Goratileona	Sekudu	 27838654547	434 	Female	2016-11-26 03:52:00
+113	nthmpo001	Mponeng	Nthejane	 27786876430	236 	Female	2016-11-26 03:52:00
+114	stxsim001	Simamkele	Seti	0845819727	221 	Male  	2016-11-26 05:28:00
+115	mlljoh030	john	maluleke	 27845819727	234 	Male  	2016-11-26 05:32:00
+116	mrktum003	Tumelo	Morakile	27747523545	308A	Male  	2016-11-26 05:32:00
+117	msngun001	Gundo	Masindi	 27761878834	433 	Male  	2016-11-29 02:51:00
+118	lchrem001	Remofilwe	Lechalaba	 27792795083	318A	Female	2016-11-29 02:53:00
+119	gvnser004	Serayen	Govender	0605259225	401A	Male  	2016-11-29 02:54:00
+120	kpndav002	David	Kapongo	 27633204403	401B	Male  	2016-11-29 02:54:00
+121	mgstan002	Tanya	Magaisa	 27766177018	107A	Female	2016-11-29 02:58:00
+122	ltgest001	Esther	Lategan	 27766464787	107B	Female	2016-11-29 02:58:00
+123	mgydav001	David	Mugoya	 27606374311	106A	Male  	2016-11-29 02:59:00
+124	lbsche001	Cheryl	Loubser	 27734650791	102A	Female	2016-11-29 03:01:00
+125	lbssil001	Silas	Loubser	 27835427662	102B	Male  	2016-11-29 03:01:00
+129	lwxsuz003	Suzan	Lauwo	 27721969932	130A	Female	2016-11-29 03:28:00
+130	ndxron002	Ronewa	Ndou	 27714456482	130B	Female	2016-11-29 03:28:00
+131	dplkyl002	Kyle	Du Plessis	 27715575685	131A	Male  	2016-11-29 03:28:00
+132	crlcon001	Conniff	Carelse	 27845002245	131B	Male  	2016-11-29 03:28:00
+133	rmlshr002	Shren	Ramlal	 27794945678	201A	Male  	2016-11-29 03:28:00
+134	bhgpra004	Pranthosh	Bhugwat	 27718851875	201B	Male  	2016-11-29 03:28:00
+135	mhntsh002	Ishmael	Mahange	 27792950525	211A	Male  	2016-11-29 03:29:00
+136	mznses001	Sesethu	Mazangazanga	 27785062127	211B	Male  	2016-11-29 03:29:00
+137	ndxmel016	Melissa	Naidoo	0843119898	304A	Female	2016-11-29 03:29:00
+138	gmxruv001	Ruva-Rashe	Gomo	 27729117545	304B	Female	2016-11-29 03:29:00
+139	jnxsha002	Shahana	Jaunoo	 27764945541	306A	Female	2016-11-29 03:31:00
+140	atrdee001	Deepika	AUTAR	 27617808911	306B	Female	2016-11-29 03:32:00
+142	plldar009	Dario	Pillay	 27616270389	307A	Male  	2016-11-29 03:32:00
+143	myxdum003	Dumisile	Moyo	 27835322382	325A	Female	2016-11-29 03:33:00
+144	adwest001	Esther	Adewumi	 27813279054	325B	Female	2016-11-29 03:33:00
+145	mtsdan014	Danielle	Mutseriwa	 27612723737	336A	Female	2016-11-29 03:33:00
+146	ndxmul002	Mulweliwanga	Ndou	 27614793277	336B	Female	2016-11-29 03:33:00
+147	ndbsis002	Sisanda	Ndebele	 27711429303	404A	Male  	2016-11-29 03:34:00
+148	gmdmpu001	Mpumelelo	Gumede	 27714808679	404B	Male  	2016-11-29 03:34:00
+149	pllnak001	nakkita	pillay	0745782452	413A	Female	2016-11-29 03:35:00
+150	mdlkay006	Kaylen	Moodley	 27613892696	413B	Male  	2016-11-29 03:36:00
+151	shwlwa001	Lwazi	Shwala	 27792948248	411A	Male  	2016-11-29 03:37:00
+152	njxnto001	Ntokozo	Noji	 27796902697	421A	Female	2016-11-29 03:38:00
+153	pltbab001	Babalwa	Plaatjies	 27617745766	421B	Female	2016-11-29 03:38:00
+154	sskkar001	Karen	Ssekimpi	 27740209486	422A	Female	2016-11-29 03:38:00
+155	llxvis002	Vishali	Lala	 738744920	422B	Female	2016-11-29 03:38:00
+156	ngcson007	Sonwabile	Ngcukuva	 27730290265	501A	Male  	2016-11-29 03:39:00
+158	mrxbon003	Bontle	Mere	 27786542614	511A	Female	2016-11-29 03:40:00
+159	stfdia002	Diamond-Timmia	Stafford	 27818674479	511B	Female	2016-11-29 03:40:00
+160	mtxtlh001	Tlholohelo	Moeti	 26656537546	518D	Male  	2016-11-29 03:40:00
+161	dllfan001	FANELESIBONGE	DLILIFA	 27782247585	518A	Male  	2016-11-29 03:41:00
+162	khtleh001	Lehlaku	Khetheng	 266 58695025	522A	Male  	2016-11-29 03:44:00
+163	byntlh001	Tlhologello	Biyana	0761992926	522B	Male  	2016-11-29 03:44:00
+164	kfkrob001	Robina	Kafuko	 27748995691	524A	Female	2016-11-29 03:44:00
+165	mgxath001	Athenkosi	Magxwalisa	 27837924459	524B	Female	2016-11-29 03:44:00
+166	grgaim001	Aimee	George	 27737006665	523A	Female	2016-11-29 03:45:00
+167	kgsfik001	Fikile	Kgasane	 27832817658	523B	Female	2016-11-29 03:45:00
+168	nqxyol001	Yolanda	Nqai	0827653315	528A	Female	2016-11-29 03:45:00
+170	mncsim003	Simvuyele	Mncunza	 27731891565	530A	Female	2016-11-29 03:46:00
+171	mbknqa001	Nqabakazi	Mbiko	 27713128651	530B	Female	2016-11-29 03:46:00
+172	mhllit003	Liteboho	Mohlotsane	 27765822612	602A	Male  	2016-11-29 03:47:00
+173	mhjnth001	Ntholeng	Mohajane	 27604536105	602B	Male  	2016-11-29 03:47:00
+174	rmtmap002	Maphoro	Ramotebele	 27767633558	608A	Male  	2016-11-29 03:48:00
+175	dbzlwa001	Lwandile	Dubazane	 27797634097	608B	Male  	2016-11-29 03:48:00
+176	skgkag002	Ngoako	Sekgobela	 27611289799	609A	Male  	2016-11-29 03:48:00
+177	kdmkho001	Khomotjo	Kudumela	 27820758053	609B	Male  	2016-11-29 03:48:00
+178	chkdun001	Duncan	Chauke	 27632427071	609C	Male  	2016-11-29 03:48:00
+179	sngkha006	Khanyiso	Sangqu	 2765688586	623 	Male  	2016-11-29 03:49:00
+180	plldil002	Dillon Diego	Pillay	 27849157900	626 	Male  	2016-11-29 03:49:00
+182	dymsip002	Siphokazi	Dayimane	 27610930573	628 	Female	2016-11-29 03:51:00
+183	jcxsin001	sinethemba	Jaca	 27619850031	624 	Male  	2016-11-29 03:55:00
+184	nkwxol003	Xolisani	Nkwentsha	 27735162868	629 	Male  	2016-11-29 03:56:00
+185	tnszim001	Zimkhitha	Tinise	 27603411616	630 	Female	2016-11-29 03:56:00
+186	mlfkha001	Khayelihle	Molefe	0730744663	631 	Male  	2016-11-29 03:56:00
+187	mngsin008	Sinobomi	Mngambi	 27786433437	633 	Female	2016-11-29 03:57:00
+188	khmsph004	Thobani	Khumalo	 27726544807	638B	Male  	2016-11-29 03:57:00
+189	slxneo001	Neo	Seloi	0763471945	638A	Male  	2016-11-29 03:57:00
+190	mtlrea003	Realeboha	Motlamelle	 27631006913	637A	Female	2016-11-29 03:58:00
+191	chkrub001	Ruby	Chikwiri	 27621531446	635B	Female	2016-11-29 03:59:00
+192	frnaaf001	Aafreen	Fernandez	 27795696074	127B	Female	2016-11-29 04:00:00
+193	mlwtsh003	Tshepiso	Moilwe	 27846910415	129B	Male  	2016-11-29 04:01:00
+194	phknom006	Nomonde	Phukwana	 27624985184	101B	Female	2016-11-30 13:01:00
+195	ndltha036	Thandokuhle	Ndlala	 27783635783	104A	Female	2016-11-30 13:01:00
+196	jmnyan001	Yanelisa	Jamani	 27783021540	104B	Female	2016-11-30 13:01:00
+198	mchlan002	Brian	Machubeni	0724997872	305A	Male  	2016-11-30 13:02:00
+199	ntmnan002	Nandi	Ntombela	 27828838151	305B	Female	2016-11-30 13:02:00
+200	ctyath001	Athenkosi	Cetyana	 27636049882	309A	Male  	2016-11-30 13:03:00
+201	mxksan002	Sange	Maxaku	 27727969902	309C	Male  	2016-11-30 13:03:00
+203	lftlin001	linda	lufuta	27719039170	409A	Female	2016-11-30 13:04:00
+204	mtxkei001	Keisha	Moeti	 27765925601	417A	Female	2016-11-30 13:04:00
+205	ndmnen001	Nengwani	Nedombeloni	 27762725403	417D	Female	2016-11-30 13:04:00
+206	mfhmul001	Mulisa Emmanuel	Mufhadi	 27739863073	505B	Male  	2016-11-30 13:06:00
+207	kggpet001	Petrus	Kagogo	 264813539951	505A	Male  	2016-11-30 13:06:00
+208	sbbnko001	Nkosazana	Sibobosi	 27616606097	606A	Female	2016-11-30 13:07:00
+209	stnses001	Sesethu	Situnda	 27722371283	606B	Female	2016-11-30 13:08:00
+210	hndkei002	Keitumetse	Hendricks	0762721586	632 	Female	2016-11-30 13:10:00
+211	hlntha017	Thapelo	Hlongwane	 27737386354	103A	Male  	2016-11-30 13:11:00
+212	bntada001	Ada	Bentsela	 27632769495	105A	Female	2016-11-30 13:11:00
+213	twtnon001	nonzaliseko	twetwa	 27787156160	124B	Female	2016-11-30 13:13:00
+214	knnpro001	Prosperity	Kunene	 27839894024	125A	Female	2016-11-30 13:15:00
+219	vwyman001	Mandisa	Van Wyk	 264818377666	204A	Female	2016-11-30 13:25:00
+221	mthnts008	Ntsoeu	Mothepu	 27633372983	207A	Male  	2016-11-30 13:26:00
+223	nxmtha010	Thando	Nxumalo	 27712867605	210A	Female	2016-11-30 13:26:00
+224	ptrlel001	Lelethu	Peter	 27769013414	212A	Female	2016-11-30 13:27:00
+225	gwnnon002	Nonkululeko	Gwangqa	 27745301586	214B	Female	2016-11-30 13:28:00
+226	rmlden001	Denisha	Ramaloo	0796939556	219A	Female	2016-11-30 13:28:00
+227	rdbseb001	Sebenele	Radebe	 27727130962	224A	Female	2016-11-30 13:29:00
+228	tshtse001	Tsepiso	Tshivhase	 27792281344	237A	Male  	2016-11-30 13:30:00
+229	thbsih001	Sihle	Thabethe	 27729241425	301B	Male  	2016-11-30 13:30:00
+230	nrysai001	Saiheal	Narayan	0616452925	302B	Male  	2016-11-30 13:31:00
+233	mffmol001	Molatelo	Maffa	0723760148	111A	Female	2016-12-05 08:56:00
+234	ncwfor001	Nhlanhla	Ncwane	 27719320678	112A	Male  	2016-12-05 08:56:00
+235	dhlwan001	Wandile	Dhlamini	 27794952827	125B	Female	2016-12-05 08:57:00
+236	hrlnic004	Nicole	Harlley	 27730034077	126A	Female	2016-12-05 08:57:00
+237	nynmuf001	Mufaro	Nyangari	0720349998	126B	Female	2016-12-05 08:57:00
+239	lchrel002	RELEBOHILE	LECHEKO	 266 51673454	402A	Male  	2016-12-05 09:01:00
+240	nrxkho002	khotso	Nare	 27739524632	402B	Male  	2016-12-05 09:01:00
+241	mhlrob002	Robin	Mahlangu	 27820481354	435A	Male  	2016-12-05 09:04:00
+242	dlnand004	Andisiwe	Dlangamandla	 27845741111	526A	Female	2016-12-05 09:06:00
+243	klcleh001	Lehlohonolo	Kalache	 27606051202	526B	Male  	2016-12-05 09:07:00
+244	dcrcas002	Cassandra	Da Cruz	 27798996192	532A	Female	2016-12-05 09:09:00
+245	rmntsh009	Tshiamo	Ramano	 27764231143	532B	Male  	2016-12-05 09:09:00
+246	mthntu004	Ntuthuko	Mthombeni	 27766217443	601A	Male  	2016-12-05 09:11:00
+247	mthsph007	Sphiwe	Muthembi	 27792556097	601B	Male  	2016-12-05 09:12:00
+248	nbnlon001	Londiwe	Nobanda	 27740413689	607A	Female	2016-12-05 09:12:00
+249	msmsab003	Sabeliwe	Msomi	 27789069885	607B	Female	2016-12-05 09:13:00
+250	gvnpri022	Prinesan	Govender	 27608289905	610A	Male  	2016-12-05 09:15:00
+251	mdpras001	Khomotjo	Modipa	 27840641091	620A	Male  	2016-12-05 09:16:00
+252	qmtsib001	Sibabalwe	Qamata	0743362481	620B	Male  	2016-12-05 09:17:00
+253	mzbntw001	Ntwanano	Mazibuko	 27798743625	620C	Male  	2016-12-05 09:17:00
+254	khtlit001	Liteboho	Khotso	 26668345801	622A	Male  	2016-12-05 09:18:00
+255	mbskul002	Kulani	Mabasa	 27722992082	621A	Male  	2016-12-05 09:19:00
+257	chbvim002	Vimbayinashe	Chibambo	 27732683882	617D	Female	2016-12-05 09:20:00
+258	prsjod002	Jodechon	Parsons	 27828964002	615A	Male  	2016-12-05 09:21:00
+259	shznok003	nokwazi	shezi	 27764829306	613A	Female	2016-12-05 09:22:00
+260	stpvan004	Cindy-lou	Stephanus	 2717765085	612A	Female	2016-12-05 09:23:00
+261	kmnmod001	MODI PASCALINE ANTOINETTE	KOMANA	 27764712795	605A	Female	2016-12-05 09:25:00
+262	vlkman002	Mandisa	Vilakazi	 27737278140	604A	Female	2016-12-05 09:26:00
+263	phkmat006	Matilda	Phokompe	 27837619019	603A	Female	2016-12-05 09:26:00
+264	mkhtso006	Tsoarelo	Makhanya	 26666100085	527A	Male  	2016-12-05 09:30:00
+265	stpash002	Ashley	Stapelfeldt	 27726866460	525A	Female	2016-12-05 09:31:00
+266	mknneo003	Neo	Mokono	 27824915779	521A	Male  	2016-12-05 09:32:00
+268	vlcjas002	Jasmin	Valcarcel	 27826409284	531A	Female	2016-12-05 09:37:00
+269	ntnlus001	Lusindiso	Ntanjana	 27624754520	129A	Male  	2016-12-05 09:43:00
+270	thngeo001	George	Thanathara	 27791103812	128A	Male  	2016-12-05 09:44:00
+271	nknxih001	Xihluke	Nkuna	 27764183548	205B	Male  	2016-12-05 09:45:00
+272	thlmfu001	mfundo	thela	842557845	215A	Male  	2016-12-05 09:46:00
+273	blmhea001	Heagan	Bloemfontein	 27765689451	217B	Male  	2016-12-05 09:47:00
+274	mgqnwa001	Nwabisa	Mgquba	 27739702862	219B	Female	2016-12-05 09:48:00
+275	nynphe003	Phelokazi	Nyongwana	 27742938939	224B	Female	2016-12-05 09:49:00
+276	gwraml001	Amlesh	Gowrie	 27798286020	242A	Male  	2016-12-05 09:49:00
+277	lzpluv002	Luvo	Luzipho	 27766549214	242B	Male  	2016-12-05 09:49:00
+279	msmdan006	Tony	Masombuka	0820992695	310B	Male  	2016-12-05 09:52:00
+280	zndman003	Mandla	Zondo	 27836016862	311A	Male  	2016-12-05 09:53:00
+281	sslram001	Ramotsumi	Sesele	 27837702018	311B	Male  	2016-12-05 09:53:00
+282	sntmoe002	Moemedi	Senatla	 26776365332	312A	Male  	2016-12-05 09:53:00
+283	sbnsik002	Sikhangezile	Sibanda	 263772975192	315A	Female	2016-12-05 09:53:00
+284	mntkud004	Kuda	Maneta	 27715951760	316B	Male  	2016-12-05 09:54:00
+285	ndwkel001	Kelvin	Ndiweni	 27828170250	317D	Male  	2016-12-05 09:54:00
+287	slxwam001	Wamiq	Salie	 27728475223	324A	Male  	2016-12-05 09:56:00
+288	flmfel001	Felemane	Felemane	 26657978201	326A	Male  	2016-12-05 09:57:00
+289	tllsem001	Sammy	Tlali	 27727022180	327A	Male  	2016-12-05 09:58:00
+291	mldkhu003	Khumo	Moledi	 27720430775	329A	Male  	2016-12-05 09:59:00
+292	khmzam013	Zamancube	Khambule	 27745725481	330A	Female	2016-12-05 09:59:00
+293	vryzoe001	Zoë	van Rooyen	0763752774	331A	Female	2016-12-05 09:59:00
+294	rmbkgo001	Kgomotso	Ramabetha	 27785127040	403A	Male  	2016-12-05 10:00:00
+295	mnysip005	Philasande	Manyoni	 27710626678	405A	Male  	2016-12-05 10:00:00
+296	mzbsam004	Samukelo	Mazibuko	0731362293	406A	Male  	2016-12-05 10:01:00
+298	lmlarn001	Arnold	Lumala	 2787420764	408A	Male  	2016-12-05 10:02:00
+299	mnsels001	Elsie	Manaswe	 27729452073	410A	Female	2016-12-05 10:03:00
+300	mkgmal015	Malesela	Makgae	0796836672	412A	Male  	2016-12-05 10:03:00
+301	nqmlwa001	Lwanele	Nqambi	 27739708699	415A	Male  	2016-12-05 10:03:00
+302	lknkha001	Khabisang	Lekena	 27720546542	419A	Male  	2016-12-05 10:04:00
+303	sssnok001	Nokulunga	Sisusa	 27603052676	421C	Female	2016-12-05 10:06:00
+304	mhlset001	Setsoto	Mahlafane	0763087329	436A	Male  	2016-12-05 10:07:00
+305	lpxoba001	Obakeng	Leepo	 27769047046	438A	Male  	2016-12-05 10:07:00
+306	kvtkav001	Kavetjiua	Kavitjene	 264816382279	502A	Male  	2016-12-05 10:08:00
+307	rkpkok001	Koketso	Rakopo	 27818007987	503A	Male  	2016-12-05 10:08:00
+308	drkkev001	Kevin	Drake	0791404782	504A	Male  	2016-12-05 10:09:00
+309	mthomp004	Omphemetse	Mothibi	 27625930474	506A	Female	2016-12-05 10:09:00
+310	thbsib004	Sibusiso	Thabene	 27781411404	507A	Male  	2016-12-05 10:10:00
+311	mckcha013	Chad	Mack	 27845041298	508A	Male  	2016-12-05 10:10:00
+312	chlsim009	Simon	Chili	 27799967748	509A	Male  	2016-12-05 10:11:00
+313	shzthe003	thembela	shezi	 27711610671	510A	Female	2016-12-05 10:11:00
+314	rmktho002	Tholoana	Ramokhoro	 26659190051	512B	Female	2016-12-05 10:13:00
+315	sngsaj001	Sajel	Singh	0836075232	513A	Female	2016-12-05 10:13:00
+319	mkhden004	Lesego	Mkhwanazi	 2784402375	515B	Male  	2016-12-05 10:14:00
+320	admsip002	Siphiwokuhle	Adams	 27630619675	516D	Female	2016-12-05 10:14:00
+321	fkzluv001	Luvo	Fokazi	 27617782946	517A	Male  	2016-12-05 10:15:00
+322	tssike001	Iketsetseng	Tsese	 27818460660	519A	Male  	2016-12-05 10:17:00
+323	stmkam001	Kamvelihle	Stemela	0786460351	420B	Female	2016-12-05 10:18:00
+325	igncru001	Crustus	Ignatius	 27826857224	127A	Male  	2016-12-05 14:42:00
+326	rmsgre002	Gretchen	Ramsden	 27605285222	312B	Female	2016-12-05 14:43:00
+327	kmbpet001	Petrus	Kambala	 264813264666	326B	Male  	2016-12-05 14:44:00
+328	mhlonk002	Onkgopotse	Mohulatsi	 27846675522	329B	Male  	2016-12-05 14:45:00
+329	ndxkim024	Kimeshan	Naidoo	 27749965604	419B	Male  	2016-12-05 14:46:00
+330	mnlkyl001	Kyle Deon	MaNuel	 2789251133	512A	Male  	2016-12-05 14:48:00
+331	mgrits002	Itseng	Mogorosi	 27726908418	513B	Female	2016-12-05 14:49:00
+332	mrtmoe002	Moeneeb	Martin	 27843249377	529A	Male  	2016-12-05 14:50:00
+333	nngnga002	Nganeavhutshilo	Nangammbi	 27720538350	604B	Male  	2016-12-05 14:51:00
+334	nktphi002	Philasande	Nkatana	 27712559489	106B	Male  	2016-12-06 03:46:00
+335	mcleve001	Eve	Mclean	 27746559501	206A	Female	2016-12-06 03:46:00
+337	mncmho001	Mholi	Mncube	 27714627012	105B	Male  	2016-12-11 10:36:00
+339	gvnkal008	Kalvin	Govender	 27814222316	128B	Male  	2016-12-11 10:38:00
+340	mbdfim001	Fimanekeni	Mbodo	 27764332004	209A	Male  	2016-12-11 10:39:00
+343	mdnmaq002	Maqhawe Junior	Madonsela	0735308833	301A	Male  	2016-12-11 10:42:00
+344	fndnik001	Nikita	Funda	 27713837751	314D	Female	2016-12-11 10:44:00
+345	bflpat013	Patrick	Bofolo	 27845704178	406B	Male  	2016-12-11 10:46:00
+346	mrmxol001	Xolane	Marman	 27711385452	437A	Male  	2016-12-11 10:47:00
+347	rchalv001	Alvina	Richards	0789440772	508B	Female	2016-12-11 10:51:00
+348	adkfra001	Francisca	Audu-Ukpoju	 2347033456114	525B	Female	2016-12-11 10:52:00
+351	mzykhu001	khumbulani	Mzayiya	 27718286771	616A	Male  	2016-12-11 10:54:00
+352	wlljud007	Jude	Wells	 27729887171	621B	Male  	2016-12-11 10:55:00
+353	sgslun001	lungile	Sigasa	 27619155812	637B	Male  	2016-12-11 10:55:00
+354	bshvuy001	Vuyisani	Bisholo	 27718364856	605B	Male  	2016-12-11 10:55:00
+355	mchsin008	Sinethemba	Mchunu	 27632696075	502B	Female	2016-12-11 10:56:00
+357	mptusi001	Usiphile	Mpetsheni	 27746771356	313A	Male  	2016-12-13 09:51:00
+360	mtsleg002	legakwa	Motsamai	 27710263711	204B	Male  	2017-01-03 16:28:00
+361	sndsin001	Sinazo	Sindaphi	 27745699308	208B	Female	2017-01-03 16:29:00
+364	gwlngc001	Ngcebo	Gwala	 27794042286	237B	Male  	2017-01-03 16:29:00
+365	ndbsiy004	Siyanda	Ndaba	 27632036817	316A	Male  	2017-01-03 16:29:00
+366	mykoli001	Olinda Larona	Myokwana	 7763274606	317B	Female	2017-01-03 16:29:00
+368	dbxgod005	Sibonelo	Dube	 27747971119	327B	Male  	2017-01-03 16:30:00
+369	sngxha002	Xhanti	Singatha	 27799155081	437B	Male  	2017-01-03 16:30:00
+370	nkwban002	Bandile	Nkawule	 27736207897	504B	Male  	2017-01-03 16:30:00
+371	blyvan001	Vanessa	Baloyi	 27789041633	612B	Female	2017-01-03 16:30:00
+372	flndoc001	Doctor	Fulani	 27737927741	614C	Male  	2017-01-03 16:30:00
+373	hlmzak001	Zak	Helms	 27785370083	617A	Male  	2017-01-03 16:30:00
+374	mndtha016	Thabiso	Mondlane	 27823294055	622B	Male  	2017-01-03 16:30:00
+375	lkntlo001	tlotlisang	lekena	 27834727240	416D	Male  	2017-01-10 02:49:00
+378	nnzodw001	Odwa	Nanze	 27739955058	515A	Male  	2017-01-10 02:57:00
+379	mlsthe004	THEMBA	MALUSI	0612160184	515C	Male  	2017-01-10 02:57:00
+380	nnymph001	MPHO	NONYANE	 27798521060	517D	Male  	2017-01-10 02:57:00
+381	gzxsth001	Andile	Gazu	0823681441	610B	Male  	2017-01-10 02:57:00
+384	mhlthe035	Thembela	Mahlanza	0735349826	116D	Male  	2017-01-25 07:46:00
+385	mjnaph001	Aphelele	Mjana	 27711407915	113A	Female	2017-01-25 07:46:00
+386	qshlud001	Ludwe	Qosho	0642781915	214A	Male  	2017-01-25 07:46:00
+387	mktnam001	Nametsegang	Mokotswe	 27791494905	303B	Male  	2017-01-25 07:46:00
+389	bkbphu001	pumeza	bakubaku	 27835046514	435B	Female	2017-01-25 07:46:00
+390	mkpthe004	Thero	Makepe	 27789035223	506B	Male  	2017-01-25 07:47:00
+391	chcbon001	Bongani	Chichava	 27740336364	509B	Male  	2017-01-25 07:47:00
+394	sbksim003	Simbulele	Sibeko	 27714485164	108B	Female	2017-02-01 11:11:00
+397	jmxnom003	nomvano	jim	 27788201740	124A	Female	2017-02-01 11:11:00
+398	mbnnan003	Nangamso	Mbonyana	 27842650997	202A	Female	2017-02-01 11:11:00
+400	ncbnku001	Nkululeko	Ncube	 27788590776	308B	Male  	2017-02-01 11:11:00
+401	ssblun002	Lungisani	Sosibo	 27745025538	317A	Male  	2017-02-01 11:11:00
+402	mbttho011	Thozama	Mbethe	 27719696709	330B	Female	2017-02-01 11:11:00
+404	mlbjoy001	Joyce	Malebye	 27781014051	520A	Female	2017-02-07 06:21:00
+405	mshneo005	Neo Given	Mashiangwako	 072 419 1846	136A	Male  	2017-02-07 06:21:00
+406	lwcson001	Sonwabile	Luwaca	 27746537246	213A	Male  	2017-02-07 06:21:00
+408	xsxsip001	Siphumle	dile	27749506445	319A	Male  	2017-02-07 06:22:00
+409	mtkobo001	OBONYE	MOTOKWANE	 27633940105	509C	Male  	2017-02-07 06:22:00
+410	mshbor001	mahlatse	masha	 27714507482	520B	Female	2017-02-07 06:22:00
+411	nkxses001	Sesethu	Nika	 27735314237	611A	Female	2017-02-07 06:22:00
+412	mnyasi001	Asisipho	Mnyanzeli	 27781028911	611B	Female	2017-02-07 06:22:00
+414	mlwloy001	Loyiso	Mlawu	 27788585244	207B	Male  	2017-02-21 15:22:00
+415	rshrat001	Ratidzo	Rushwaya	 263 77481771	215C	Female	2017-02-21 15:23:00
+416	mtstsh056	Tshepo	Moitsemang	 27787347695	315B	Male  	2017-02-21 15:24:00
+417	zhxlaw001	Lawrence	Zhou	 27786682200	318B	Male  	2017-02-21 15:24:00
+418	onvmic001	Miche	Onverwag	 27818388458	331B	Female	2017-02-21 15:24:00
+419	nkhlef001	Lefa	Nkhabanyane	 27786049731	403B	Male  	2017-02-21 15:24:00
+420	mtltha033	Thabo	Motelle	 27710533326	414A	Male  	2017-02-21 15:24:00
+423	ndxkee009	Keegan	Naidoo	0784515566	528B	Male  	2017-02-21 15:25:00
+424	mdlmba004	Mbali	Mdlalose	 27727885608	603B	Female	2017-02-21 15:25:00
+425	mththe033	Thendo	Muthambi	 27765381533	203B	Male  	2017-02-28 11:40:00
+426	mhlrea001	Reabetswe	Mohulatsi	 27614061776	205A	Male  	2017-02-28 11:40:00
+427	lfstse001	Tsepang	Lefosa	 27734163132	109A	Male  	2017-02-28 11:40:00
+428	mchsim007	Simphiwe	Mchunu	 27749041051	117C	Male  	2017-02-28 11:40:00
+429	gxtasa001	Asanda	Gxotelwa	 27829630195	136B	Female	2017-02-28 11:40:00
+431	mddolw001	Olwethu	Mdoda	0835329425	217A	Male  	2017-02-28 11:40:00
+432	frrwyn001	Wynand	Ferreira	0713865287	410B	Male  	2017-02-28 11:40:00
+433	ntkhlu001	Hlumelo	Notoko	 27638679452	438B	Male  	2017-02-28 11:40:00
+435	mpncas002	Cassandra	Mapanda	 27724069038	516A	Female	2017-02-28 11:40:00
+436	nrmnic006	Nicole	Norman	 27842114529	531B	Female	2017-02-28 11:40:00
+437	mgnedw001	Edwin	Muganzi	 27789368392	408B	Male  	2017-02-28 12:02:00
+438	mtmtsh009	Tshegofatso	Motimele	 27718715617	103B	Female	2017-03-02 07:54:00
+440	mdxpfa002	Pfariso	Mudau	 27815943564	113C	Male  	2017-03-02 07:54:00
+442	mrsjac013	Jack	Moores	 14253452349	116C	Male  	2017-03-02 07:55:00
+443	mokoena	Julias	Katiso	 27732219940	117A	Male  	2017-03-02 07:55:00
+444	chmmar020	Marylouise	Chambu	 27630985046	313B	Female	2017-03-02 07:55:00
+445	shnnso001	Nsovo	Shandlale	 27721065111	316D	Male  	2017-03-02 07:55:00
+446	ndlnol010	Noluvuyo	Ndila	 27 647569233	409B	Female	2017-03-02 07:55:00
+447	mtzsom001	Somila	Mateza	 27734353500	409C	Female	2017-03-02 07:55:00
+448	mkwkha004	Faith	Mukwevho	0827829818	411B	Female	2017-03-02 07:55:00
+449	sdzkha001	Khanya	Sidzumo	 27837020490	412B	Female	2017-03-02 07:56:00
+450	mthsiy020	siyabonga	mthembu	 27762519229	414D	Male  	2017-03-02 07:56:00
+451	brkyad001	Yadah	Brooks	 27768331189	418A	Female	2017-03-02 07:56:00
+452	zwlthe002	Thembakazi	Zwelibanzi	27719636889	418B	Female	2017-03-02 07:56:00
+454	mlnnku002	NKULULEKO	MLONDO	 27618481605	507B	Male  	2017-03-02 07:58:00
+456	nphtsh001	Tshifhiwa	Nephawe	 27795293158	527B	Female	2017-03-02 08:00:00
+457	skhmpe001	Mpendulo	Skhakhane	 27840762506	616B	Male  	2017-03-02 08:00:00
+458	mkhcel003	Celumusa	Mkhabela	 27785035088	616C	Male  	2017-03-02 08:00:00
+459	shbmar002	Martin	Shabangu	 27626231948	616D	Male  	2017-03-02 08:00:00
+460	bysxol002	Xola	Booysen	 27833545377	618A	Male  	2017-03-02 08:01:00
+461	gtstil001	Tildah	Gatsi	 27620234735	213B	Female	2017-03-02 14:32:00
+462	nzlath001	Athenkosi	Nzala	 27810035316	217C	Male  	2017-03-02 14:32:00
+463	dvdcha010	Chandre	Davids	 27614945408	418D	Female	2017-03-02 14:32:00
+464	mgwman006	MANENO	MGWAMI	 27638623098	617B	Male  	2017-03-02 14:32:00
+465	khzsen001	Cebile	Khuzwayo	0735584120	405B	Female	2017-03-03 08:58:00
+466	jdxsim002	Simphiwe	Jada	0785782888	517B	Male  	2017-03-03 08:58:00
+467	ncmnel001	Nelsiwe	Ncama	 27710365254	617C	Female	2017-03-03 08:59:00
+468	mlnlon003	Lonwabo	Mafani	 27739418489	618D	Male  	2017-03-03 08:59:00
+469	rmsvin002	VINCENT	RAMASENYA	 27711792054	309B	Male  	2017-03-04 02:06:00
+470	mglsis002	Sisa	Mgauli	 27726787374	318D	Male  	2017-03-04 02:07:00
+471	rtsedw001	Edward	Ratsela	0794020253	414C	Male  	2017-03-04 02:08:00
+472	msnsam003	sibusiso	masina	 27633408428	516C	Male  	2017-03-04 02:08:00
+473	jngsiy001	siyanda	jonga	 27768123615	521C	Female	2017-03-04 02:08:00
+474	dznwan001	Wandisa	Dzingwe	 27726780585	209B	Female	2017-03-04 03:31:00
+475	dbxtha018	Thandi	Dube	 27787611905	314B	Female	2017-03-04 03:31:00
+476	ncbsiy003	Siyathemba	Ncube	 27780819066	417B	Female	2017-03-04 04:00:00
+479	smmdum001	Derick	Simamane	0732330419	614D	Male  	2017-03-04 04:22:00
+481	fllnon001	nonnie	falala	 844897595	117B	Female	2017-03-04 04:54:00
+484	stsmok001	Mokgadi	Setshekgamollo	 27834668389	516B	Female	2017-03-04 05:20:00
+485	gqbsib004	Sibonise	Gqibitole	 27845004519	110B	Male  	2017-03-04 05:22:00
+486	fllnon001	falala	nonnie	 844897595	407B	Female	2017-03-04 05:22:00
+488	mzlndi002	Ndimande	Mzolisa	 27714086388	416A	Male  	2017-03-04 05:31:00
+489	plklet002	Poloko	Leteka	 27727154382	217D	Male  	2017-03-04 05:56:00
+492	hlpmpu001	Zamo	Hlophe	 2746097240	111B	Male  	2017-03-04 06:32:00
+493	rmlhum001	Humbelani	Ramulumo	0769176602	416C	Male  	2017-03-04 06:32:00
+494	mlbtha016	Thabiso	Mlaba	 27792293880	109C	Male  	2017-03-04 06:39:00
+496	vhyros001	Ross	Van dear Heyde	 27848972716	518C	Male  	2017-03-04 07:07:00
+498	zlxlwa002	Lwazi	Zulu	 27725850260	615B	Male  	2017-03-04 07:07:00
+499	nqthe001	Thembisa	Nqose	 27789523451	214C	Female	2017-03-04 07:25:00
+500	mkgmot012	Motshwane	Makgoba	 27729527540	313C	Male  	2017-03-04 07:35:00
+501	nmpluk001	Lukhanyo	Nompehle	0817452492	116B	Male  	2017-03-04 07:44:00
+502	fllnon001	nonnie	falala	 844897595	518B	Female	2017-03-04 07:54:00
+503	mltsie001	siphokazi	molteno	 634182449	113B	Female	2017-03-04 08:08:00
+504	vlknom005	Nomfundo	Vilakazi	0712774990	405C	Female	2017-03-04 08:18:00
+505	fllnon001	nonnie falala	falala	 844897595	618C	Female	2017-03-04 08:18:00
+507	fllnon001	nonnie falala	falala	 844897595	416B	Male  	2017-03-04 09:01:00
+508	fllnon001	falala	nonnie	 844897595	301C	Male  	2017-03-04 09:02:00
+510	gmdnko003	Nkosingiphile	Gumede	0764444695	503B	Male  	2017-03-04 09:12:00
+511	fllnon001	nonnie	falala	 844897595	414B	Male  	2017-03-04 09:27:00
+512	fllno001	nonnie	falala	 844897595	614B	Male  	2017-03-04 10:02:00
+513	fllnon01	nonnie	falala	 844897595	615C	Male  	2017-03-04 10:22:00
+514	fllnon01	nonnie	falala	 844897595	316C	Male  	2017-03-04 10:47:00
+515	fllnon01	nonnie	falala	 844897595	209C	Female	2017-03-04 11:41:00
+516	fllnon001	nonnie	falala	 844897595	611C	Female	2017-03-04 11:41:00
+517	fllnon001	nonnie	falala	 844897595	225 	Male  	2017-03-04 12:04:00
+518	agslan001	Lance-Selae	August	 27747467744	314A	Male  	2017-03-04 12:53:00
+519	fllnon001	NONNIE	FALALA	 844897595	614A	Male  	2017-03-04 13:07:00
+520	mshler011	Lerato	Mushaphi	0794656331	111C	Female	2017-03-05 02:38:00
+521	dlmsib043	Siboniso	Dlamini	 27633121150	621C	Male  	2017-03-05 02:59:00
+522	fllnon001	nonnie	falala	 844897595	417C	Male  	2017-03-05 03:13:00
+526	mpxmoe001	Moeketsi	Mpooa	 27722241806	314C	Male  	2017-03-05 05:11:00
+529	myxmxo002	moyo	mxolisi	 623650051	214D	Male  	2017-03-05 05:44:00
+530		mahlatse	tloubatla		228 	Female	2017-03-05 06:20:00
+531	sdlavu001	Avuyile	Sidloyi	27635458019	110A	Female	2017-03-05 06:55:00
+532	fllnon001	nonnie	falala	 844897595	319B	Male  	2017-03-05 07:16:00
+533	mvksbu001	Sbusile	Mavokoza	 27785201743	303A	Male  	2017-03-05 07:49:00
+534	mbhaph001	aphiwe	mabhija	 27630373280	625 	Male  	2017-03-05 07:52:00
+535	fllnon001	nonnie	falala	 844897595	618B	Male  	2017-03-05 08:35:00
+536	fllnon001	NONNY	FALALA	 27722241806	324B	Female	2017-03-05 12:56:00
+537	mspkac001	Kachipa	Masipa	27721559697	627 	Female	2017-03-05 12:56:00
+540	mdxpfa002	Pfariso	Mudau	 27815943564	514C	Male  	2017-03-06 02:16:00
+541	sthler007	Lerato	Sithole	 27736773289	510B	Female	2017-03-06 03:29:00
+542	01416715	Martina	Peterson	 27817481625	103C	Male  	2017-03-06 05:12:00
+545	ncbnta001	Ntando	Ncube	0845819727	109B	Male  	2017-03-06 05:53:00
+546	mgneph001	Ephraim	Magangwe	0845819727	514B	Male  	2017-03-06 05:53:00
+547	mqtlin002	Lindani	Maqetuka	 27831234567	210B	Male  	2017-03-06 07:03:00
+548	dbxand007	Cherise	Dube	 27717205109	202B	Female	2017-03-06 07:56:00
+549	khnzub004	Zubair	Khan	 27728029131	206B	Male  	2017-03-06 07:58:00
+550	gqzmzw001	mzwandile	gqeza	0607387187	116A	Male  	2017-03-07 04:34:00
+551	lbvpau002	Paul	Loeb van Zuilenburg	 27720760167	307B	Male  	2017-03-07 04:35:00
+552	bkbsam002	samantha	bekebeke	 27726649480	117D	Female	2017-03-07 08:31:00
+553	pnykat001	katleho	poonyane	 27786242158	436B	Female	2017-03-07 08:31:00
+554	ngwndu003	Ndumiso	Ngwenya	 27763851324	213C	Male  	2017-03-07 12:00:00
+556	lksnda001	Ndapandula	Lukas	 27635334549	212B	Female	2017-03-07 13:00:00
+557	fff	Nonnie	FALALA	 27844897595	328B	Female	2017-03-08 06:45:00
+558	tshria002	ofentse	tshepe	27762323015	521B	Male  	2017-03-08 06:45:00
+559	mrtret001	Rethabile nathaniel	Mariti	0784062634	514A	Male  	2017-03-08 06:45:00
+560	drnsin001	Sinethemba	Dorane	 27818043857	514D	Male  	2017-03-08 06:45:00
+561	mrxvuy003	Vuyo	Maraxaba	 27727524269	503C	Male  	2017-03-08 06:45:00
+562	mthsib024	sibuyiselo	mthini	 27827667373	501B	Male  	2017-03-08 06:45:00
+563	ss	Nonnie	FALALA	 27844897595	429 	Male  	2017-03-08 06:46:00
+564	ngwndu003	Ndumiso	Ngwenya	 27763851324	112B	Male  	2017-03-08 07:20:00
+567	mrtret001	Rethabile nathaniel	Mariti	 27784062634	613B	Male  	2017-03-08 08:18:00
+568	ctzoli002	olivia	coetzee	 27817481625	108A	Female	2017-03-08 08:19:00
+569	sbtelv001	Elvis	Sebatane	 27724258572	215B	Male  	2017-03-08 08:29:00
+570	pswsin001	sinawo	poswa	 27795131107	101A	Male  	2017-03-08 08:29:00
+571	nckilk002	Ilke	Nackerdien	 27746889862	318C	Female	2017-03-08 08:29:00
+572	sbnalp002	ALPHEUS	SIBANYONI	 27606743857	317C	Male  	2017-03-08 09:52:00
+573	bylkhu002	khumbulani	ntuli	 27737216453	437C	Male  	2017-03-08 09:52:00
+574	rlrath001	Athi	Ralarala	0611709918	519B	Male  	2017-03-08 09:52:00
+575	mhlthe034	Themba	Mahlangu	➕27735165120	208A	Male  	2017-03-08 12:00:00
+\.
+
+
+--
+-- Name: approvals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myres
+--
+
+SELECT pg_catalog.setval('approvals_id_seq', 575, true);
+
+
+--
+-- Data for Name: blocked; Type: TABLE DATA; Schema: public; Owner: myres
+--
+
+COPY blocked (id, student_number, blocked_date) FROM stdin;
+\.
+
+
+--
+-- Name: blocked_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myres
+--
+
+SELECT pg_catalog.setval('blocked_id_seq', 1, false);
+
+
+--
+-- Data for Name: declines; Type: TABLE DATA; Schema: public; Owner: myres
+--
+
+COPY declines (id, student_number, name, surname, mobile_number, flat_number, gender, decline_date) FROM stdin;
+1	tsttha012	Tumelo	Mokoena	 27835504933	101A	Male  	2016-11-13 11:55:03
+2	tsttha011	Moloi	Tsepo	 27835504933	102B	Male  	2016-11-13 12:12:10
+3	fllnon003	Nonnie2	FALALA2	0844897567	132 	Male  	2016-11-18 03:37:38
+4					    	Female	2016-11-24 10:25:01
+5	lpttae001	Tsepiso	Lepota	 27797113	133 	Female	2016-11-24 14:43:57
+6	bkhzwe001	Zwelihle	Bukhwele	 27620822485	133 	Male  	2016-11-24 14:44:04
+7	skdgor001	Goratileona	Sekudu	0838654547	231 	Female	2016-11-24 15:05:13
+8					    	Female	2016-11-25 05:33:36
+9					    	Female	2016-11-29 02:57:45
+10					    	Female	2016-11-30 12:59:00
+11	ncwfor001	Nhlanhla	Ncwane	 27719320678	106A	Male  	2016-11-30 13:13:01
+12	sbksim003	Simbulele	Sibeko	 27714485164	106A	Female	2016-11-30 13:13:04
+13	nknxih001	Xihluke	Nkuna	0764183548	625 	Male  	2016-11-30 13:18:49
+14	nknxih00	Kenny	Nkuna	 27764183548	625 	Male  	2016-11-30 13:18:56
+15	nknxih011	Xihluke	Nkuna	 27764183548	625 	Male  	2016-11-30 13:19:03
+16	hrlnic004	Nicole	Harlley	 27730034077	136B	Female	2016-11-30 13:21:49
+17	sndsin001	Sinazo	Sindaphi	 2745699308	202B	Female	2016-11-30 13:24:12
+18	nynphe003	Phelokazi	Nyongwana	 27742938939	224A	Female	2016-11-30 13:29:28
+19	thlmfu001	mfundo	thela	 27842557845	303A	Male  	2016-11-30 13:32:11
+20					    	Female	2016-12-05 08:54:01
+21	ndlnol010	noluvuyo	ndila	27735127388	409A	Female	2016-12-05 09:00:30
+22	gwraml001	Amlesh	Gowrie	 27798286020	433 	Male  	2016-12-05 09:02:25
+23	klsamy001	Amy	Kulsen	 27731455270	433 	Female	2016-12-05 09:02:32
+24	gzxsth001	Sthabiso	Gazu	 27823681441	433 	Male  	2016-12-05 09:02:41
+25	gvnkal008	Kalvin	Govender	 27814222316	433 	Male  	2016-12-05 09:03:19
+26	gmdnko003	Nkosi	Gumede	0764444695	433 	Male  	2016-12-05 09:03:27
+27	mtkobo001	OBONYE	MOTOKWANE	 27633940105	433 	Male  	2016-12-05 09:03:33
+28	mzykhu001	Khumbulani	Mzayiya	 27718286771	435A	Male  	2016-12-05 09:04:58
+29	khnzub004	zubair	khan	 27728029131	606A	Male  	2016-12-05 09:16:17
+30	lzpluv002	Luvo	Luzipho	 27766549214	606B	Male  	2016-12-05 09:16:25
+31	jdxsim002	simphiwe	jada	27785782888	632 	Male  	2016-12-05 09:17:44
+32	mntkud004	Kuda	Maneta	 27715951760	632 	Male  	2016-12-05 09:17:50
+33	zndman003	Mandla	Zondo	 27836016862	624 	Male  	2016-12-05 09:18:07
+34	bshvuy001	Vuyisani	Bisholo	 27718364856	612A	Male  	2016-12-05 09:24:33
+35	zndman003	Mandla	Zondo	 27836016862	611A	Male  	2016-12-05 09:27:04
+36	zndman003	Mandla	Zondo	 27836016862	614A	Male  	2016-12-05 09:32:48
+37	nngnga002	Nganeavhutshilo	Nangammbi	 27720538350	604A	Male  	2016-12-05 09:36:36
+38	mgrits002	Itseng	Mogorosi	 27726908418	310B	Female	2016-12-05 09:52:19
+39	kmbpet001	Petrus	Kambala	 264813264666	319A	Male  	2016-12-05 09:56:25
+40	mcleve001	Eve	Mclean	27746559501	324A	Female	2016-12-05 09:57:00
+41					    	Female	2016-12-05 10:01:15
+42	mrtmoe002	Moeneeb	Martin	 27843249377	419A	Male  	2016-12-05 10:04:28
+43	rchalv001	Alvina	Richards	0789440772	508A	Female	2016-12-05 10:10:45
+44	zwlthe002	Thembakazi	Zwelibanzi	 27719636889	510A	Female	2016-12-05 10:12:36
+45	ndxkim024	Kimeshan	Naidoo	 27749965604	420B	Male  	2016-12-05 10:19:49
+46	igncru001	Crustus	Ignatius	 27826857224	127A	Male  	2016-12-05 10:20:16
+47	zhxlaw001	Lawrence	Zhou	 27786682200	318B	Male  	2016-12-05 10:22:18
+48	kmbpet001	Petrus	Kambala	 264813264666	324B	Male  	2016-12-05 10:22:24
+49	mhlonk002	Onkgopotse	Mohulatsi	 27846675522	326A	Male  	2016-12-05 10:22:28
+50	nngnga002	Nganeavhutshilo	Nangammbi	 27720538350	512A	Male  	2016-12-05 10:22:31
+51	stsmok001	Mokgadi	Setshekgamollo	 27834668389	519B	Female	2016-12-05 10:22:33
+52	nnymph001	mpho	nonyane	 27798521060	525B	Male  	2016-12-05 10:22:35
+53					    	Female	2016-12-05 14:42:01
+54	mcleve001	Eve	Mclean	 27746559501	529A	Female	2016-12-05 14:51:27
+55	blyvan001	Vanessa	Baloyi	 27789041633	527B	Female	2016-12-06 04:46:18
+56	stsmok001	Mokgadi	Setshekgamollo	 27834668389	520B	Female	2016-12-06 04:47:38
+57					515A	Male  	2016-12-07 06:43:22
+58					    	Female	2016-12-11 10:31:58
+59	dntsib002	Sibonelo	Dontsane	 27743678411	406B	Male  	2016-12-11 10:46:56
+60					    	Female	2017-01-03 16:23:00
+61	lwcson001	Sonwabile	Luwaca	 27746537246	515A	Male  	2017-01-10 02:57:50
+62	smmdum001	Derick	Simamane	 27738047692	110B	Male  	2017-01-25 07:46:19
+63	mlbjoy001	Joyce	Malebye	 27781014051	625 	Female	2017-02-01 11:08:19
+64	hhhdddoo	sthemba	madodndo	216503564	625 	Male  	2017-02-01 11:10:42
+65	qshlud001	Ludwe	Qosho	 27738047692	110A	Male  	2017-02-01 11:31:36
+66	mlbjoy001	Joyce	Malebye	 27781014051	228 	Female	2017-02-01 11:33:04
+67	mlbjoy001	Joyce	Malebye	 27781014051	228 	Female	2017-02-01 11:33:15
+68	mlslek001	Morema	Moloisi	 27785917744	520A	Male  	2017-02-07 06:22:39
+69	mpxmoe001	Moeketsi	Mpooa	 27722241806	217A	Male  	2017-02-21 15:23:50
+70	mpxmoe001	Moeketsi	Mpooa	 27722241806	217A	Male  	2017-02-21 15:23:57
+71	mddolw001	Olwethu	Mdoda	 27835329425	418A	Male  	2017-03-02 08:00:43
+72	mgwman006	MANENO	MGWAM	 27638623098	618A	Male  	2017-03-02 08:01:10
+73	dvdcha010	Chandre	Davids	 27614945408	618A	Female	2017-03-02 08:01:14
+74					    	Female	2017-03-04 02:06:48
+75	nkwxol003	Xolisani	Nkwentsha	0642600647	309B	Male  	2017-03-04 02:08:52
+76	fllnon001	nonnie	falala	 844897595	614B	Male  	2017-03-04 10:01:57
+77	fllnon001	nonnie	falala	 844897595	307B	Male  	2017-03-05 07:14:28
+78	mhlthe034	Themba	Mahlangu	 2735165120	627 	Male  	2017-03-05 12:56:15
+79	mtltha033	Thabo	Motelle	 27710533326	514A	Male  	2017-03-06 05:50:30
+80	lbvpau002	Paul	Loeb van Zuilenburg	 27 720760167	429 	Male  	2017-03-07 03:44:30
+81	ngwndu003	Ndumiso	Ngwenya	 27763851324	429 	Male  	2017-03-07 13:00:53
+82	fllon	nonnie	falala		429 	Male  	2017-03-07 13:01:01
+83	sbtelv001	Elvis	Sebatane	0724258572	429 	Male  	2017-03-08 06:44:50
+84	aaaa	Nonnie	FALALA	 27844897595	429 	Female	2017-03-08 06:44:54
+85	ndlrop001	Ropafadzo	Ndlovu	 27617313047	429 	Female	2017-03-08 06:45:15
+86	ngwndu003	Ndumiso	Ngwenya	 27763851324	328B	Male  	2017-03-08 06:45:20
+87	ncbnku001	NKULELKO	NCUBE	 27788590776	112B	Male  	2017-03-08 07:19:01
+88	ngwndu003	Ndumiso	Ngwenya	 27763851324	108A	Male  	2017-03-08 07:29:31
+89	ndlrop001	Ropafadzo	Ndlovu	 27617313047	108A	Female	2017-03-08 08:18:05
+90	fllnon004	nonnie	FALALA	 27844897595	613B	Female	2017-03-08 08:18:11
+91	ndlrop001	Ropafadzo	Ndlovu	 27824370158	208A	Female	2017-03-08 12:13:34
+92	gwnnon002	Nonkululeko	Gwangqa	 27745301586	208A	Female	2017-03-08 12:13:39
+\.
+
+
+--
+-- Name: declines_id_seq; Type: SEQUENCE SET; Schema: public; Owner: myres
+--
+
+SELECT pg_catalog.setval('declines_id_seq', 92, true);
+
+
+--
+-- Data for Name: flats; Type: TABLE DATA; Schema: public; Owner: myres
+--
+
+COPY flats (flat_number, flat_type) FROM stdin;
+101A	TID
+101B	TID
+102A	TID
+102B	TID
+103A	DID
+103B	DID
+103C	DID
+104A	TID
+104B	TID
+105A	TID
+105B	TID
+106A	TIT
+106B	TIT
+107A	TIT
+107B	TIT
+108A	TIT
+108B	TIT
+109A	DID
+109B	DID
+109C	DID
+110A	TID
+110B	TID
+111A	DID
+111B	DID
+111C	DID
+112A	TID
+112B	TID
+113A	DID
+113B	DID
+113C	DID
+116A	VIV
+116B	VIV
+116C	VIV
+116D	VIV
+117A	VIV
+117B	VIV
+117C	VIV
+117D	VIV
+121 	BCA
+122 	BCA
+123 	BCA
+124A	TIT
+124B	TIT
+125A	TIT
+125B	TIT
+126A	TIT
+126B	TIT
+127A	TIT
+127B	TIT
+128A	TIT
+128B	TIT
+129A	TIT
+129B	TIT
+130A	TIT
+130B	TIT
+131A	TIT
+131B	TIT
+132 	BCA
+133 	BCA
+134 	BCA
+135 	BCA
+136A	TIT
+136B	TIT
+201A	TID
+201B	TID
+202A	TID
+202B	TID
+203A	TID
+203B	TID
+204A	TID
+204B	TID
+205A	TID
+205B	TID
+206A	TIT
+206B	TIT
+207A	TIT
+207B	TIT
+208A	TIT
+208B	TIT
+209A	DID
+209B	DID
+209C	DID
+210A	TID
+210B	TID
+211A	TID
+211B	TID
+212A	TID
+212B	TID
+213A	DID
+213B	DID
+213C	DID
+214A	VIV
+214B	VIV
+214C	VIV
+214D	VIV
+215A	DID
+215B	DID
+215C	DID
+217A	VIV
+217B	VIV
+217C	VIV
+217D	VIV
+219A	TIT
+219B	TIT
+220 	BCA
+221 	BCA
+222 	BCA
+223 	BCA
+224A	TIT
+224B	TIT
+225 	BCB
+226 	BCB
+227 	BCB
+228 	BCB
+229 	BCB
+230 	BCB
+231 	BCB
+232 	BCB
+233 	BCB
+234 	BCB
+235 	BCB
+236 	BCB
+237A	TIT
+237B	TIT
+238 	BCA
+239 	BCA
+240 	BCA
+241 	BCA
+242A	TIT
+242B	TIT
+301A	DID
+301B	DID
+301C	DID
+302A	TID
+302B	TID
+303A	TID
+303B	TID
+304A	TID
+304B	TID
+305A	TID
+305B	TID
+306A	TIT
+306B	TIT
+307A	TIT
+307B	TIT
+308A	TIT
+308B	TIT
+309A	DID
+309B	DID
+309C	DID
+310A	TID
+310B	TID
+311A	TID
+311B	TID
+312A	TID
+312B	TID
+313A	DID
+313B	DID
+313C	DID
+314A	VIV
+314B	VIV
+314C	VIV
+314D	VIV
+315A	TID
+315B	TID
+316A	VIV
+316B	VIV
+316C	VIV
+316D	VIV
+317A	VIV
+317B	VIV
+317C	VIV
+317D	VIV
+318A	VIV
+318B	VIV
+318C	VIV
+318D	VIV
+319A	TIT
+319B	TIT
+320 	BCA
+321 	BCA
+322 	BCA
+323 	BCA
+324A	TIT
+324B	TIT
+325A	TIT
+325B	TIT
+326A	TIT
+326B	TIT
+327A	TIT
+327B	TIT
+328A	TIT
+328B	TIT
+329A	TIT
+329B	TIT
+330A	TIT
+330B	TIT
+331A	TIT
+331B	TIT
+332 	BCA
+333 	BCA
+334 	BCA
+335 	BCA
+336A	TIT
+336B	TIT
+401A	TID
+401B	TID
+402A	TID
+402B	TID
+403A	TID
+403B	TID
+404A	TID
+404B	TID
+405A	DID
+405B	DID
+405C	DID
+406A	TIT
+406B	TIT
+407A	TIT
+407B	TIT
+408A	TIT
+408B	TIT
+409A	DID
+409B	DID
+409C	DID
+410A	TID
+410B	TID
+411A	TID
+411B	TID
+412A	TID
+412B	TID
+413A	TID
+413B	TID
+414A	VIV
+414B	VIV
+414C	VIV
+414D	VIV
+415A	TID
+415B	TID
+416A	VIV
+416B	VIV
+416C	VIV
+416D	VIV
+417A	VIV
+417B	VIV
+417C	VIV
+417D	VIV
+418A	VIV
+418B	VIV
+418C	VIV
+418D	VIV
+419A	TIT
+419B	TIT
+420A	TID
+420B	TID
+421A	DID
+421B	DID
+421C	DID
+422A	TIT
+422B	TIT
+423 	BCB
+424 	BCB
+425 	BCB
+426 	BCB
+427 	BCB
+428 	BCB
+429 	BCB
+430 	BCB
+431 	BCB
+432 	BCB
+433 	BCB
+434 	BCB
+435A	TIT
+435B	TIT
+436A	TID
+436B	TID
+437A	DID
+437B	DID
+437C	DID
+438A	TIT
+438B	TIT
+501A	TID
+501B	TID
+502A	TID
+502B	TID
+503A	DID
+503B	DID
+503C	DID
+504A	TID
+504B	TID
+505A	TID
+505B	TID
+506A	TIT
+506B	TIT
+507A	TIT
+507B	TIT
+508A	TIT
+508B	TIT
+509A	DID
+509B	DID
+509C	DID
+510A	TID
+510B	TID
+511A	TID
+511B	TID
+512A	TID
+512B	TID
+513A	TID
+513B	TID
+514A	VIV
+514B	VIV
+514C	VIV
+514D	VIV
+515A	DID
+515B	DID
+515C	DID
+516A	VIV
+516B	VIV
+516C	VIV
+516D	VIV
+517A	VIV
+517B	VIV
+517C	VIV
+517D	VIV
+518A	VIV
+518B	VIV
+518C	VIV
+518D	VIV
+519A	TIT
+519B	TIT
+520A	TID
+520B	TID
+521A	DID
+521B	DID
+521C	DID
+522A	TIT
+522B	TIT
+523A	TIT
+523B	TIT
+524A	TIT
+524B	TIT
+525A	TIT
+525B	TIT
+526A	TIT
+526B	TIT
+527A	TIT
+527B	TIT
+528A	TIT
+528B	TIT
+529A	TIT
+529B	TIT
+530A	TID
+530B	TID
+531A	TID
+531B	TID
+532A	TIT
+532B	TIT
+601A	TID
+601B	TID
+602A	TID
+602B	TID
+603A	TID
+603B	TID
+604A	TID
+604B	TID
+605A	TID
+605B	TID
+606A	TIT
+606B	TIT
+607A	TIT
+607B	TIT
+608A	TIT
+608B	TIT
+609A	DID
+609B	DID
+609C	DID
+610A	TID
+610B	TID
+611A	DID
+611B	DID
+611C	DID
+612A	TID
+612B	TID
+613A	TID
+613B	TID
+614A	VIV
+614B	VIV
+614C	VIV
+614D	VIV
+615A	DID
+615B	DID
+615C	DID
+616A	VIV
+616B	VIV
+616C	VIV
+616D	VIV
+617A	VIV
+617B	VIV
+617C	VIV
+617D	VIV
+618A	VIV
+618B	VIV
+618C	VIV
+618D	VIV
+619A	TIT
+619B	TIT
+620A	DID
+620B	DID
+620C	DID
+621A	DID
+621B	DID
+621C	DID
+622A	TIT
+622B	TIT
+623 	BCB
+624 	BCB
+625 	BCB
+626 	BCB
+627 	BCB
+628 	BCB
+629 	BCB
+630 	BCB
+631 	BCB
+632 	BCB
+633 	BCB
+634 	BCB
+635A	TIT
+635B	TIT
+636A	TID
+636B	TID
+637A	TID
+637B	TID
+638A	TIT
+638B	TIT
+\.
+
+
+--
+-- Name: applications_pkey; Type: CONSTRAINT; Schema: public; Owner: myres
+--
+
+ALTER TABLE ONLY applications
+    ADD CONSTRAINT applications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: approvals_pkey; Type: CONSTRAINT; Schema: public; Owner: myres
+--
+
+ALTER TABLE ONLY approvals
+    ADD CONSTRAINT approvals_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blocked_pkey; Type: CONSTRAINT; Schema: public; Owner: myres
+--
+
+ALTER TABLE ONLY blocked
+    ADD CONSTRAINT blocked_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: declines_pkey; Type: CONSTRAINT; Schema: public; Owner: myres
+--
+
+ALTER TABLE ONLY declines
+    ADD CONSTRAINT declines_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: flats_pkey; Type: CONSTRAINT; Schema: public; Owner: myres
+--
+
+ALTER TABLE ONLY flats
+    ADD CONSTRAINT flats_pkey PRIMARY KEY (flat_number);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
