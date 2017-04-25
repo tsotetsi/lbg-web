@@ -33,7 +33,7 @@
 
 			try{
 
-				$pdo = new PDO("pgsql:host=localhost;port=5432;dbname=lbgsample;user=webdev;password=webdev");
+				$pdo = new PDO("pgsql:host=154.127.59.170;port=5432;dbname=db_myres_lbg_2017_live;user=myres;password=57dse0IfU2@nd_=enx2(ndf{J%!3");
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 				
@@ -47,7 +47,7 @@
 
 		//Whe using pg_pconnect function
 		function connString(){
-			$this->con_str = "host=$this->hostname dbname=$this->db_name user=webdev password=$this->db_password";
+			$this->con_str = "host=$this->hostname dbname=$this->db_name user=myres password=$this->db_password";
 			return $this->con_str;
 		}
 	}
