@@ -11,8 +11,9 @@
 	$approval_table = "approvals";
 	$decline_table = "declines";
 	$blocked_table = "blocked";
+	$student_numbers_table = "student_numbers";
 
-	$pdo = new PDO("pgsql:host=154.127.59.170;port=5432;dbname=db_myres_lbg_2017_live;user=myres;password=57dse0IfU2@nd_=enx2(ndf{J%!3");
+	$pdo = new PDO("pgsql:host=localhost;port=5432;dbname=lbgsample;user=webdev;password=webdev");
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
@@ -25,6 +26,12 @@
 								flat_type CHAR(3) NOT NULL
 								);";
 			$stmt  = $pdo->prepare($query);
+			$stmt->execute();
+
+			$query = "CREATE TABLE IF NOT EXISTS $student_numbers_table(
+								student_number CHAR(64) PRIMARY KEY
+								);";
+			$stmt = $pdo->prepare($query);
 			$stmt->execute();
 
 			$query = "CREATE TABLE IF NOT EXISTS $applications_table(
